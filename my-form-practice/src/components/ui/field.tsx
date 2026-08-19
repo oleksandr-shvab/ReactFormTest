@@ -9,10 +9,7 @@ function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
     <fieldset
       data-slot="field-set"
-      className={cn(
-        "flex flex-col",
-        className
-      )}
+      className={cn("flex flex-col", className)}
       {...props}
     />
   )
@@ -27,10 +24,7 @@ function FieldLegend({
     <legend
       data-slot="field-legend"
       data-variant={variant}
-      className={cn(
-        "",
-        className
-      )}
+      className={cn("", className)}
       {...props}
     />
   )
@@ -38,14 +32,7 @@ function FieldLegend({
 
 function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
-      data-slot="field-group"
-      className={cn(
-        "",
-        className
-      )}
-      {...props}
-    />
+    <div data-slot="field-group" className={cn("", className)} {...props} />
   )
 }
 
@@ -55,16 +42,14 @@ const fieldVariants = cva(
     variants: {
       orientation: {
         vertical: "flex-col",
-        horizontal:
-          "flex-row",
-        responsive:
-          "flex-col",
+        horizontal: "flex-row",
+        responsive: "flex-col",
       },
     },
     defaultVariants: {
       orientation: "vertical",
     },
-  }
+  },
 )
 
 function Field({
@@ -87,10 +72,7 @@ function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="field-content"
-      className={cn(
-        "flex",
-        className
-      )}
+      className={cn("flex", className)}
       {...props}
     />
   )
@@ -103,11 +85,7 @@ function FieldLabel({
   return (
     <Label
       data-slot="field-label"
-      className={cn(
-        "flex",
-        "",
-        className
-      )}
+      className={cn("flex", "", className)}
       {...props}
     />
   )
@@ -115,14 +93,7 @@ function FieldLabel({
 
 function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
-      data-slot="field-label"
-      className={cn(
-        "flex",
-        className
-      )}
-      {...props}
-    />
+    <div data-slot="field-label" className={cn("flex", className)} {...props} />
   )
 }
 
@@ -130,12 +101,7 @@ function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
       data-slot="field-description"
-      className={cn(
-        "",
-        "",
-        "",
-        className
-      )}
+      className={cn("", "", "", className)}
       {...props}
     />
   )
@@ -152,18 +118,12 @@ function FieldSeparator({
     <div
       data-slot="field-separator"
       data-content={!!children}
-      className={cn(
-        "",
-        className
-      )}
+      className={cn("", className)}
       {...props}
     >
       <Separator className="" />
       {children && (
-        <span
-          className=""
-          data-slot="field-separator-content"
-        >
+        <span className="" data-slot="field-separator-content">
           {children}
         </span>
       )}
@@ -200,7 +160,7 @@ function FieldError({
       <ul className="flex">
         {uniqueErrors.map(
           (error, index) =>
-            error?.message && <li key={index}>{error.message}</li>
+            error?.message && <li key={index}>{error.message}</li>,
         )}
       </ul>
     )
