@@ -24,7 +24,7 @@ export const signupSchema = z
       error: "Please select a role",
     }),
 
-    acceptTerms: z.literal(true, {
+    acceptTerms: z.boolean().refine((value) => value === true, {
       error: "You must accept the terms to continue",
     }),
   })
