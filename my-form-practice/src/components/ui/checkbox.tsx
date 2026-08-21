@@ -11,10 +11,18 @@ function Checkbox({
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
-      className={cn("", className)}
+      className={cn(
+        "flex size-4 shrink-0 items-center justify-center rounded-[4px] border border-input",
+        "outline-none focus-visible:border-ring aria-invalid:border-destructive",
+        "data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground",
+        className,
+      )}
       {...props}
     >
-      <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" className="">
+      <CheckboxPrimitive.Indicator
+        data-slot="checkbox-indicator"
+        className="flex items-center justify-center"
+      >
         <CheckIcon />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
