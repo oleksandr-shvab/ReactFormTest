@@ -41,7 +41,12 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
-      className={cn("flex", className)}
+      className={cn(
+        "flex h-9 w-full items-center justify-between rounded-md border border-input",
+        "bg-background px-3 text-sm outline-none focus-visible:border-ring",
+        "aria-invalid:border-destructive data-[placeholder]:text-muted-foreground",
+        className,
+      )}
       {...props}
     >
       {children}
@@ -64,7 +69,11 @@ function SelectContent({
       <SelectPrimitive.Content
         data-slot="select-content"
         data-align-trigger={position === "item-aligned"}
-        className={cn("relative", className)}
+        className={cn(
+          "relative z-50 min-w-[8rem] overflow-hidden rounded-md border border-input",
+          "bg-popover text-popover-foreground shadow-md",
+          className,
+        )}
         position={position}
         align={align}
         {...props}
@@ -103,10 +112,14 @@ function SelectItem({
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
-      className={cn("", className)}
+      className={cn(
+        "relative flex cursor-default items-center rounded-sm py-1.5 pl-8 pr-2 text-sm",
+        "outline-none focus:bg-accent focus:text-accent-foreground",
+        className,
+      )}
       {...props}
     >
-      <span className="">
+      <span className="absolute left-2 flex size-3.5 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
           <CheckIcon className="pointer-events-none" />
         </SelectPrimitive.ItemIndicator>
