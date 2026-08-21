@@ -3,19 +3,19 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import type { z } from "zod"
 
 import { signupSchema } from "./schema"
-import { Field, FieldLabel, FieldError } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Field, FieldLabel, FieldError } from "@/components/custom-ui/field"
+import { Input } from "@/components/custom-ui/input"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Button } from "@/components/ui/button"
-import { PasswordInput } from "@/components/ui/password-input"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+} from "@/components/custom-ui/select"
+import { Checkbox } from "@/components/custom-ui/checkbox"
+import { Button } from "@/components/custom-ui/button"
+import { PasswordInput } from "@/components/custom-ui/password-input"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/custom-ui/card"
 
 type SignupFormInput = z.input<typeof signupSchema>
 type SignupFormOutput = z.output<typeof signupSchema>
