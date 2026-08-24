@@ -20,6 +20,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import { PasswordInput } from "@/components/ui/password-input"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 
 const roles = [
   { value: "developer", label: "Developer" },
@@ -173,6 +174,13 @@ export function SignupForm() {
               </Field>
             )}
           />
+
+          {mutation.isError && (
+            <Alert variant="destructive">
+              <AlertTitle>Something went wrong</AlertTitle>
+              <AlertDescription>{mutation.error.message}</AlertDescription>
+            </Alert>
+          )}
 
           <Button type="submit" disabled={mutation.isPending}>
             {mutation.isPending ? "Creating account..." : "Create account"}
