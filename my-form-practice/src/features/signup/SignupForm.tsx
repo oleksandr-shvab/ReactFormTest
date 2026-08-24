@@ -1,8 +1,12 @@
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import type { z } from "zod"
 
-import { signupSchema } from "./schema"
+import {
+  signupSchema,
+  type SignupFormInput,
+  type SignupFormOutput,
+} from "./schema"
+import { useSignupMutation } from "./useSignupMutation"
 import { Field, FieldLabel, FieldError } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
@@ -17,9 +21,6 @@ import { Button } from "@/components/ui/button"
 import { PasswordInput } from "@/components/ui/password-input"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
-type SignupFormInput = z.input<typeof signupSchema>
-type SignupFormOutput = z.output<typeof signupSchema>
-
 const roles = [
   { value: "developer", label: "Developer" },
   { value: "designer", label: "Designer" },
@@ -29,6 +30,7 @@ const roles = [
 export function SignupForm() {
   const form = useForm<SignupFormInput, unknown, SignupFormOutput>({
     resolver: zodResolver(signupSchema),
+    mode: "onBlur",
     defaultValues: {
       fullName: "",
       email: "",
@@ -47,8 +49,14 @@ export function SignupForm() {
     formState: { errors },
   } = form
 
+  const mutation = useSignupMutation()
+
   const onSubmit = (values: SignupFormOutput) => {
-    console.log(values)
+    mutation.mutate(values, {
+      onSuccess: (data) => {
+        console.log(data)
+      },
+    })
   }
 
   return (
@@ -166,7 +174,9 @@ export function SignupForm() {
             )}
           />
 
-          <Button type="submit">Create account</Button>
+          <Button type="submit" disabled={mutation.isPending}>
+            {mutation.isPending ? "Creating account..." : "Create account"}
+          </Button>
         </CardContent>
       </Card>
     </form>
