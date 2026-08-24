@@ -7,8 +7,9 @@ import {
   type SignupFormOutput,
 } from "./schema"
 import { useSignupMutation } from "./useSignupMutation"
+import { TextField } from "./TextField"
+import { PasswordField } from "./PasswordField"
 import { Field, FieldLabel, FieldError } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -18,7 +19,6 @@ import {
 } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
-import { PasswordInput } from "@/components/ui/password-input"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
 
@@ -26,6 +26,7 @@ const roles = [
   { value: "developer", label: "Developer" },
   { value: "designer", label: "Designer" },
   { value: "manager", label: "Manager" },
+  { value: "other", label: "Other" },
 ] as const
 
 export function SignupForm() {
@@ -35,7 +36,7 @@ export function SignupForm() {
     defaultValues: {
       fullName: "",
       email: "",
-      age: "" as unknown as number,
+      age: "",
       password: "",
       confirmPassword: "",
       role: undefined,
@@ -62,6 +63,7 @@ export function SignupForm() {
 
   return (
     <form
+      noValidate
       onSubmit={handleSubmit(onSubmit)}
       className="flex w-full justify-center"
     >
@@ -70,59 +72,42 @@ export function SignupForm() {
           <CardTitle>Create an account</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-6">
-          <Field data-invalid={!!errors.fullName}>
-            <FieldLabel htmlFor="fullName">Full name</FieldLabel>
-            <Input
-              id="fullName"
-              aria-invalid={!!errors.fullName}
-              {...register("fullName")}
-            />
-            {errors.fullName && <FieldError errors={[errors.fullName]} />}
-          </Field>
+          <TextField
+            name="fullName"
+            label="Full name"
+            register={register}
+            error={errors.fullName}
+          />
 
-          <Field data-invalid={!!errors.email}>
-            <FieldLabel htmlFor="email">Email</FieldLabel>
-            <Input
-              id="email"
-              type="email"
-              aria-invalid={!!errors.email}
-              {...register("email")}
-            />
-            {errors.email && <FieldError errors={[errors.email]} />}
-          </Field>
+          <TextField
+            name="email"
+            label="Email"
+            type="email"
+            register={register}
+            error={errors.email}
+          />
 
-          <Field data-invalid={!!errors.age}>
-            <FieldLabel htmlFor="age">Age</FieldLabel>
-            <Input
-              id="age"
-              type="number"
-              aria-invalid={!!errors.age}
-              {...register("age")}
-            />
-            {errors.age && <FieldError errors={[errors.age]} />}
-          </Field>
+          <TextField
+            name="age"
+            label="Age"
+            type="number"
+            register={register}
+            error={errors.age}
+          />
 
-          <Field data-invalid={!!errors.password}>
-            <FieldLabel htmlFor="password">Password</FieldLabel>
-            <PasswordInput
-              id="password"
-              aria-invalid={!!errors.password}
-              {...register("password")}
-            />
-            {errors.password && <FieldError errors={[errors.password]} />}
-          </Field>
+          <PasswordField
+            name="password"
+            label="Password"
+            register={register}
+            error={errors.password}
+          />
 
-          <Field data-invalid={!!errors.confirmPassword}>
-            <FieldLabel htmlFor="confirmPassword">Confirm password</FieldLabel>
-            <PasswordInput
-              id="confirmPassword"
-              aria-invalid={!!errors.confirmPassword}
-              {...register("confirmPassword")}
-            />
-            {errors.confirmPassword && (
-              <FieldError errors={[errors.confirmPassword]} />
-            )}
-          </Field>
+          <PasswordField
+            name="confirmPassword"
+            label="Confirm password"
+            register={register}
+            error={errors.confirmPassword}
+          />
 
           <Controller
             name="role"

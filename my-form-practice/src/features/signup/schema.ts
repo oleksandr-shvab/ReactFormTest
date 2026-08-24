@@ -9,6 +9,7 @@ export const signupSchema = z
     age: z.coerce
       .number({ error: "Age is required" })
       .int("Age must be a whole number")
+      .min(1, "Age is required")
       .min(18, "You must be at least 18 years old")
       .max(120, "Enter a valid age"),
 
